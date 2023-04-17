@@ -20,7 +20,7 @@ public class Cliente {
     private String email;
     private String telefono;
     private String fechaNacimiento;
-    private boolean promocionado = false;
+    private boolean promocionado;
     
     public Cliente(String nDNI, String nNombre, String nApellidos, String nDireccion, String nEmail, String nTelefono, String nFechaNacimiento){
         
@@ -31,6 +31,7 @@ public class Cliente {
         this.email = nEmail;
         this.telefono = nTelefono;
         this.fechaNacimiento = nFechaNacimiento;
+        promocionado = false;
         
     }
     
@@ -91,10 +92,6 @@ public class Cliente {
     public String getFechaNacimiento() {
         return fechaNacimiento;
     }
-
-    
-    public String mostrarDatosCliente
-    
     
     public void setDNI(String DNI) {
         this.DNI = DNI;

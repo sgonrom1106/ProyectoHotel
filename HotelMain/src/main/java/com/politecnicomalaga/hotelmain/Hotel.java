@@ -16,7 +16,7 @@ public class Hotel {
     private String direccionPostal;
     private String telefono;
     private String email;
-    private ArrayList<Cliente> cliente;
+    private ArrayList<Cliente> miCliente;
     
     public Hotel(String nDescripcion, String nNombre, String nDireccionPostal, String nTelefono, String nEmail) {
 
@@ -25,15 +25,26 @@ public class Hotel {
         this.direccionPostal = nDireccionPostal;
         this.telefono = nTelefono;
         this.email = nEmail;
-        cliente = new ArrayList<Cliente>();
+        this.miCliente = new ArrayList<>();
         
     }
     
-    public int buscarCliente(String DNI){
+    public void crearCliente(String DNI, String nombre, String apellidos, String direccion, String email, String telefono, String fechaNacimiento){
         
-        for(int i = 0; i< cliente.size(); i++){
+        miCliente.add(new Cliente(DNI,nombre,apellidos,direccion,email,telefono,fechaNacimiento));
+    }   
+
+    public void eliminarCliente(String DNI){
+        Cliente c = this.buscarCliente(DNI);
+        miCliente.remove(c);
+    
+    }
+    
+    public Cliente[] buscarCliente(String DNI){
+        
+        for(int i = 0; i< miCliente.size(); i++){
             
-            if(cliente.get(i).getDNI().contentEquals(DNI)){
+            if(miCliente.get(i).getDNI().contentEquals(DNI)){
                 
               return i;  
                 
@@ -49,23 +60,20 @@ public class Hotel {
     public String mostrarClienteDNI(String DNI){
         
             if(buscarCliente(DNI) != -1){
-                return cliente.get(this.buscarCliente(DNI)).mostrarDatosCliente();
+                return miCliente.get(this.buscarCliente(DNI)).mostrarDatosCliente();
             }
         
         return null;
     }
     
-
-    public void crearCliente(String DNI, String nombre, String apellidos, String direccion, String email, String telefono,boolean promocionado, String fechaNacimiento){
-       
-        Cliente miCliente = new Cliente(DNI,nombre,apellidos,direccion,email,telefono,fechaNacimiento);
-        cliente.add(miCliente);
-    }   
-
-    public void eliminarCliente(String DNI){
+    public Cliente[] todosClientes(){
         
-        cliente.remove();
-    
+        if(miCliente.size() == 0)
+            return null;
+        
+        Cliente[] listaC = new Cliente[miCliente.size()];
+        return miCliente.toArray(listaC);
+        
     }
     
     public String getDescripcion() {
@@ -88,4 +96,25 @@ public class Hotel {
         return email;
     }
 
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setDireccionPostal(String direccionPostal) {
+        this.direccionPostal = direccionPostal;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    
 }
